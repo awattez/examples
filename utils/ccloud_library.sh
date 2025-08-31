@@ -485,7 +485,7 @@ function ccloud::create_acls_all_resources_full_access() {
   QUIET="${QUIET:-false}"
   [[ $QUIET == "true" ]] &&
     local REDIRECT_TO="/dev/null" ||
-    local REDIRECT_TO="/dev/stdout"
+    local REDIRECT_TO="/dev/tty"
 
   ccloud kafka acl create --allow --service-account $SERVICE_ACCOUNT_ID --operation CREATE --topic '*' &>"$REDIRECT_TO"
   ccloud kafka acl create --allow --service-account $SERVICE_ACCOUNT_ID --operation DELETE --topic '*' &>"$REDIRECT_TO"
@@ -514,7 +514,7 @@ function ccloud::delete_acls_ccloud_stack() {
   QUIET="${QUIET:-false}"
   [[ $QUIET == "true" ]] &&
     local REDIRECT_TO="/dev/null" ||
-    local REDIRECT_TO="/dev/stdout"
+    local REDIRECT_TO="/dev/tty"
 
   echo "Deleting ACLs for service account ID $SERVICE_ACCOUNT_ID"
 
@@ -1035,6 +1035,9 @@ function ccloud::destroy_ccloud_stack() {
   fi
 
   SERVICE_ACCOUNT_ID=$1
+  ENVIRONMENT=${ENVIRONMENT:-$(ccloud::get_environment_id_from_service_id $SERVICE_ACCOUNT_ID)}
+
+  ccloud environment use $ENVIRONMENT || exit 1
 
   PRESERVE_ENVIRONMENT="${PRESERVE_ENVIRONMENT:-false}"
 
@@ -1047,17 +1050,17 @@ function ccloud::destroy_ccloud_stack() {
   QUIET="${QUIET:-false}"
   [[ $QUIET == "true" ]] && 
     local REDIRECT_TO="/dev/null" ||
-    local REDIRECT_TO="/dev/stdout"
+    local REDIRECT_TO="/dev/tty"
 
   echo "Destroying Confluent Cloud stack associated to service account id $SERVICE_ACCOUNT_ID"
 
   # Delete associated ACLs
   ccloud::delete_acls_ccloud_stack $SERVICE_ACCOUNT_ID
 
-  if [[ "$KSQLDB_ENDPOINT" != "" ]]; then # This is just a quick check, if set there is a KSQLDB in this stack
-    local ksqldb_id=$(ccloud ksql app list -o json | jq -r 'map(select(.name == "'"$KSQLDB_NAME"'")) | .[].id')
-    echo "Deleting KSQLDB: $KSQLDB_NAME : $ksqldb_id"
-    ccloud ksql app delete $ksqldb_id &> "$REDIRECT_TO"
+  ksqldb_id_found=$(ccloud ksql app list -o json | jq -r 'map(select(.name == "'"$KSQLDB_NAME"'")) | .[].id')
+  if [[ $ksqldb_id_found != "" ]]; then
+    echo "Deleting KSQLDB: $KSQLDB_NAME : $ksqldb_id_found"
+    ccloud ksql app delete $ksqldb_id_found &> "$REDIRECT_TO"
   fi
 
   # Delete connectors associated to this Kafka cluster, otherwise cluster deletion fails

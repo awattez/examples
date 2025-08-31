@@ -105,6 +105,8 @@ Configure |crep|
 
 .. include:: includes/replicator-connect-worker-to-destination.rst
 
+.. _configure-acls:
+
 Configure ACLs
 ^^^^^^^^^^^^^^
 
@@ -223,12 +225,9 @@ Additional Resources
 ====================
 
 - For additional considerations on running |crep| to |ccloud|, refer to `Migrate Topics on Confluent Cloud Clusters <https://docs.confluent.io/cloud/migrate-topics-on-cloud-clusters.html>`__.
-- To run a |ccloud| demo that showcases a hybrid |ak| cluster: one cluster is a
-  self-managed |ak| cluster running locally, the other is a |ccloud| cluster, see
-  :ref:`cp-demo`.
-- To find additional |ccloud| demos, see :ref:`Confluent Cloud Demos Overview<ccloud-demos-overview>`.
+- To find additional |ccloud| demos, see :cloud:`Confluent Cloud Tutorials|get-started/cloud-demos.html`.
 - For a practical guide to configuring, monitoring, and optimizing your |ak|
   client applications, see `Developing Client Applications on Confluent Cloud <https://docs.confluent.io/cloud/current/client-apps/index.html>`__.
 - To run a |crep| tutorial with an active-active multi-datacenter design, with
   two instances of |crep-full| that copy data bidirectionally between the
-  datacenters, see :ref:`replicator`.
+  datacenters, see :platform:`Replicator Demo on Docker|multi-dc-deployments/replicator/replicator-docker-tutorial.html#replicator`.

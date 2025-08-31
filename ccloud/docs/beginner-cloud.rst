@@ -8,7 +8,7 @@ Overview
 
 This tutorial shows you how to use the `Confluent Cloud CLI
 <https://docs.confluent.io/ccloud-cli/current/install.html>`__ to interact with
-your `Confluent Cloud <https://confluent.cloud/login>`__ cluster. It uses real
+your `Confluent Cloud <https://www.confluent.io/confluent-cloud/tryfree/>`__ cluster. It uses real
 resources in |ccloud|, and it creates and deletes topics, service accounts,
 credentials, and ACLs. Following the workflow in this tutorial, you accomplish
 the following steps:
@@ -28,30 +28,17 @@ the following steps:
 Prerequisites
 -------------
 
--  Access to `Confluent Cloud <https://confluent.cloud/login>`__.
+-  `Confluent Cloud <https://www.confluent.io/confluent-cloud/tryfree/>`__
 
 -  Local `install of Confluent Cloud CLI
    <https://docs.confluent.io/ccloud-cli/current/install.html>`__ (v1.25.0 or later)
 
--  .. include:: ../../ccloud/docs/includes/prereq_timeout.rst
+-  .. include:: includes/prereq_timeout.rst
 
 -  `mvn <https://maven.apache.org/install.html>`__ installed on your host
 
 -  `jq <https://github.com/stedolan/jq/wiki/Installation>`__ installed on your host
 
-
-Cost to Run Tutorial
---------------------
-
-Caution
-~~~~~~~
-
-.. include:: includes/ccloud-examples-caution.rst
-
-|ccloud| Promo Code
-~~~~~~~~~~~~~~~~~~~
-
-.. include:: includes/ccloud-examples-promo-code.rst
 
 Run Tutorial
 ------------
@@ -840,7 +827,6 @@ Additional Resources
 -  See `Developing Client Applications on Confluent Cloud <https://docs.confluent.io/cloud/current/client-apps/index.html>`__ for a guide to configuring, monitoring, and
    optimizing your |ak| client applications when using |ccloud|.
 
--  See other :ref:`ccloud-demos-overview`.
+-  See other :cloud:`Confluent Cloud Tutorials|get-started/cloud-demos.html`.
 
 -  For an example that showcases how to monitor |ak-tm| client application and |ccloud| metrics, and steps through various failure scenarios to see how they are reflected in the provided metrics, see the :ref:`Observability for Apache Kafka® Clients to Confluent Cloud demo <ccloud-observability-index>`.
-
